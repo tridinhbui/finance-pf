@@ -9,3 +9,5 @@ npm run build   # production build to dist/
 ```
 
 Resume content lives in `src/data.js`.
+
+Live site: https://tridinhbui.github.io/finance-pf/
