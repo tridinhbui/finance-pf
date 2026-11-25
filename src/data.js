@@ -1,8 +1,17 @@
-export const stats = [
-  { value: 3, prefix: '$', suffix: 'B', label: 'Balance sheet forecast' },
-  { value: 2, prefix: '$', suffix: 'M', label: 'AI savings pitched to Board' },
-  { value: 180, suffix: '+', label: 'M&A targets screened' },
-  { value: 85, prefix: '+', suffix: '%', label: 'Student fund return' },
+// Headline achievements shown at the top of the page
+export const impact = [
+  { value: 3, prefix: '$', suffix: 'B', org: 'Smithfield Foods', title: 'Liquidity forecast',
+    text: 'Rebuilt working-capital and FCF models. Under 5% variance, 80% faster refresh.', model: 'liquidity' },
+  { value: 2, prefix: '$', suffix: 'M', org: 'Smithfield Foods', title: 'AI strategy to the Board',
+    text: 'Pitched AI-in-Finance to the Board and helped launch the Finance AI Enablement Center.', model: 'ai' },
+  { value: 60, suffix: '%', org: 'Smithfield Foods', title: 'Faster executive reporting',
+    text: 'Less prep time for monthly Chairman decks and quarterly earnings benchmarking.', model: 'peers' },
+  { value: 180, suffix: '+', org: 'Caprae Capital', title: 'M&A targets screened',
+    text: 'Screened on 3-statement and operating fit; 12 advanced to deeper review.', model: 'deals' },
+  { value: 1.5, prefix: '$', suffix: 'M', dec: 1, org: 'Blackstone · Revantage', title: 'Losses mitigated',
+    text: 'Downside and cost-risk analysis across a $350M real estate portfolio.', model: 'dcf' },
+  { value: 85, prefix: '+', suffix: '%', org: 'Investment Group', title: 'Student fund return',
+    text: 'Ran a $250K fund as President, 30 pts ahead of the S&P 500.', model: 'fund' },
 ];
 
 // One line per role; `models` link into the interactive dashboards

@@ -50,6 +50,9 @@ export function initDashboards() {
     org.textContent = m.org;
     blurb.textContent = m.blurb;
     if (destroy) destroy();
+    view.classList.remove('swap');
+    void view.offsetWidth;
+    view.classList.add('swap');
     destroy = m.mod.render(view);
     if (scroll) document.getElementById('work').scrollIntoView({ behavior: 'smooth' });
   }

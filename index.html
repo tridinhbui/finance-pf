@@ -2,9 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>Tri Bui | Corporate Finance & FP&A</title>
-    <meta name="description" content="Tri Bui — Corporate Finance Associate. Interactive models from real FP&A, valuation and private equity work." />
+    <meta name="description" content="Tri Bui — Corporate Finance Associate at Smithfield Foods. Interactive models from real FP&A, valuation and private equity work." />
     <meta name="theme-color" content="#faf8f3" />
     <link rel="icon" href="/tri-bui.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -12,9 +12,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   </head>
   <body>
+    <div class="progress" id="progress" aria-hidden="true"></div>
     <header class="nav">
       <a href="#top" class="brand">Tri Bui</a>
       <nav>
+        <a href="#impact">Impact</a>
         <a href="#work">Models</a>
         <a href="#experience">Experience</a>
         <a href="#about">About</a>
@@ -25,24 +27,52 @@
     <main id="top">
       <section class="hero">
         <div class="hero-text">
-          <p class="eyebrow">Corporate Finance · FP&amp;A · Valuation</p>
-          <h1>I build the models<br /><em>finance runs on.</em></h1>
-          <p class="lead">Corporate Finance Associate at Smithfield Foods. Below are working versions of the tools I've built. Try them.</p>
-          <div class="hero-actions">
-            <a class="btn primary" href="#work">Explore the models ↓</a>
+          <span class="now in-1"><i></i><span>Now · Corporate Finance Associate, Smithfield Foods <b>Fortune 500</b></span></span>
+          <h1 class="in-2">
+            <span class="line"><span>I build the models</span></span>
+            <span class="line"><em>finance runs on.</em></span>
+          </h1>
+          <p class="lead in-3">
+            FP&amp;A, valuation and AI-in-finance. I've pitched to a Board of Directors, forecast a
+            <strong>$3B balance sheet</strong> within 5%, and screened <strong>180+ M&amp;A targets</strong>.
+          </p>
+          <ul class="creds in-4">
+            <li>Ex-Blackstone (Revantage)</li>
+            <li>Ex-Deloitte</li>
+            <li>Private Equity</li>
+            <li>CFA L1 Candidate</li>
+            <li>GPA 3.85</li>
+          </ul>
+          <div class="hero-actions in-5">
+            <a class="btn primary" href="#impact">See my impact <span class="arr">↓</span></a>
             <button class="btn ghost" type="button" data-open-chat>Ask my assistant</button>
           </div>
         </div>
-        <figure class="hero-photo">
+        <figure class="hero-photo in-photo">
           <img src="/tri-bui.png" alt="Portrait of Tri Bui" width="400" height="400" />
+          <div class="float-card fc-1"><span>+85%</span>fund return</div>
+          <div class="float-card fc-2"><span>$2M</span>AI savings</div>
         </figure>
       </section>
 
-      <section class="stats" id="stats"></section>
+      <div class="marquee" aria-label="Organizations">
+        <div class="marquee-track">
+          <span>Smithfield Foods</span><span>Blackstone · Revantage</span><span>Caprae Capital Partners</span><span>Deloitte</span><span>Macalester College</span>
+          <span aria-hidden="true">Smithfield Foods</span><span aria-hidden="true">Blackstone · Revantage</span><span aria-hidden="true">Caprae Capital Partners</span><span aria-hidden="true">Deloitte</span><span aria-hidden="true">Macalester College</span>
+        </div>
+      </div>
+
+      <section id="impact">
+        <header class="section-head reveal">
+          <span class="num">01</span>
+          <h2>Selected impact</h2>
+        </header>
+        <div class="impact" id="impact-grid"></div>
+      </section>
 
       <section id="work" class="work">
         <header class="section-head reveal">
-          <span class="num">01</span>
+          <span class="num">02</span>
           <h2>Work, modeled</h2>
           <span class="head-note">Interactive · illustrative data</span>
         </header>
@@ -64,7 +94,7 @@
 
       <section id="experience">
         <header class="section-head reveal">
-          <span class="num">02</span>
+          <span class="num">03</span>
           <h2>Experience</h2>
         </header>
         <div class="xp" id="xp"></div>
@@ -72,12 +102,12 @@
 
       <section id="about" class="about">
         <header class="section-head reveal">
-          <span class="num">03</span>
+          <span class="num">04</span>
           <h2>Education &amp; Toolkit</h2>
         </header>
         <div class="about-grid">
           <article class="edu reveal">
-            <span class="gpa">3.85<small> / 4.00</small></span>
+            <span class="gpa"><span data-count="3.85" data-dec="2">0</span><small> / 4.00</small></span>
             <h3>Macalester College</h3>
             <p>B.A. Quantitative Finance &amp; Computer Science, 2025</p>
             <ul class="badges">

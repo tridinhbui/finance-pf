@@ -97,7 +97,14 @@ export function kpis(container, defs) {
     .join('');
   return (key, value, sub = '', tone = '') => {
     const el = container.querySelector(`[data-k="${key}"]`);
-    el.querySelector('.kpi-value').textContent = value;
+    const v = el.querySelector('.kpi-value');
+    if (v.textContent !== value) {
+      v.textContent = value;
+      // restart the "value changed" pulse
+      v.classList.remove('flash');
+      void v.offsetWidth;
+      v.classList.add('flash');
+    }
     const s = el.querySelector('.kpi-sub');
     s.textContent = sub;
     s.className = `kpi-sub ${tone}`;
