@@ -52,9 +52,19 @@ export const experience = [
     metric: '−20%',
     metricLabel: 'reporting discrepancies',
     role: 'Financial Analyst',
-    period: '2023',
+    period: 'Summer 2023',
     line: 'Month-end close, SQL and Tableau KPI reporting, internal controls.',
     models: [['bva', 'BvA']],
+  },
+  {
+    company: 'DetectAuto',
+    mono: 'DA',
+    metric: 'CV',
+    metricLabel: 'smart-vision camera platform',
+    role: 'Software Engineer',
+    period: 'Summer 2023',
+    line: 'Fargo, ND. Built a full-stack web platform for smart-vision cameras: neural-network computer vision, Next.js, Python and AWS.',
+    models: [['sysdesign', 'System Design'], ['ml', 'ML']],
   },
   {
     company: 'Macalester Investment Group',
@@ -124,7 +134,7 @@ export const stack = [
   {
     group: 'Machine Learning & AI',
     icon: 'ƒ(x)',
-    items: ['pandas', 'scikit-learn', 'PyTorch', 'Time series', 'LLM APIs', 'RAG', 'MLflow'],
+    items: ['PyTorch', 'Computer vision (CNNs)', 'scikit-learn', 'pandas', 'Time series', 'LLM APIs', 'RAG', 'MLflow'],
   },
   {
     group: 'Databases',
@@ -145,6 +155,8 @@ export const terminal = [
   '✓ 12 models built',
   '$ terraform apply -var cloud=aws',
   '✓ 14 resources · autoscaling 2–40 tasks · multi-AZ',
+  '$ python detect.py --model cnn --source camera_01',
+  '✓ vision model serving on AWS · Next.js dashboard live',
   '$ npm run build && git push',
   '✓ deployed to github pages',
 ];

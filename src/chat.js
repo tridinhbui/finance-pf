@@ -12,7 +12,7 @@ const intents = [
     chip: 'Who is Tri?',
     keys: ['who', 'about', 'introduce', 'summary', 'yourself', 'background', 'tri bui', 'overview', 'ai la', 'gioi thieu'],
     answer:
-      "Tri Bui is a Corporate Finance Associate in the Finance Leadership Rotation at Smithfield Foods (Fortune 500). He works on FP&A, liquidity forecasting and valuation, and leads work on bringing AI into finance.\n\nBefore that he was at Caprae Capital (private equity), Revantage, a Blackstone portfolio company, and Deloitte. He studied Quantitative Finance & Computer Science at Macalester College (GPA 3.85).",
+      "Tri Bui is a Corporate Finance Associate in the Finance Leadership Rotation at Smithfield Foods (Fortune 500). He works on FP&A, liquidity forecasting and valuation, and leads work on bringing AI into finance.\n\nBefore that he was at Caprae Capital (private equity), Revantage, a Blackstone portfolio company, Deloitte, and DetectAuto as a software engineer. He studied Quantitative Finance & Computer Science at Macalester College (GPA 3.85).",
   },
   {
     id: 'smithfield',
@@ -40,6 +40,12 @@ const intents = [
     keys: ['blackstone', 'revantage', 'real estate', 'noi', 'property', 'properties'],
     answer:
       'At Revantage, a Blackstone portfolio company (summer 2024), Tri built asset-level DCF and cash-flow models across a $75M portfolio of 15+ properties. He also ran downside and cost-risk analyses on a $350M portfolio, helping mitigate $1.5M in potential losses.',
+  },
+  {
+    id: 'detectauto',
+    keys: ['detectauto', 'detect auto', 'fargo', 'north dakota', 'computer vision', 'camera', 'cameras', 'vision', 'neural', 'neural network', 'cnn', 'software engineer', 'swe', 'internship'],
+    answer:
+      'In summer 2023 Tri was a Software Engineer at DetectAuto in Fargo, North Dakota, alongside his Deloitte internship. He built a full-stack web platform for smart-vision cameras, using neural-network computer vision, with Next.js, Python and AWS.',
   },
   {
     id: 'deloitte',
@@ -91,7 +97,7 @@ const intents = [
     chip: 'Tech stack',
     keys: ['tech', 'stack', 'engineer', 'engineering', 'fullstack', 'full-stack', 'full stack', 'react', 'node', 'javascript', 'typescript', 'machine learning', 'ml', 'data engineer', 'spark', 'pyspark', 'dbt', 'airflow', 'pipeline', 'coding', 'code', 'developer', 'computer science', 'cs', 'llm', 'rag', 'cong nghe', 'aws', 'azure', 'cloud', 'system design', 'kubernetes', 'docker', 'vue', 'next', 'nextjs', 'java', 'c++', 'scalab'],
     answer:
-      "Tri pairs finance with a Computer Science degree:\n• Languages: Python, R, C/C++, Java, SQL, JavaScript/TypeScript\n• System design & cloud: AWS, Azure, Docker, Kubernetes, Terraform, Redis, queues, autoscaling\n• Full-stack: React, Next.js, Vue.js, Node.js, FastAPI\n• Data & ML: Databricks, Spark, dbt, Airflow, scikit-learn, PyTorch, LLMs/RAG\n\nTry the System Design, Data Pipeline and ML Forecast models in the Work section.",
+      "Tri pairs finance with a Computer Science degree, and worked as a Software Engineer at DetectAuto (smart-vision cameras, Next.js, Python, AWS):\n• Languages: Python, R, C/C++, Java, SQL, JavaScript/TypeScript\n• System design & cloud: AWS, Azure, Docker, Kubernetes, Terraform, Redis, queues, autoscaling\n• Full-stack: React, Next.js, Vue.js, Node.js, FastAPI\n• Data & ML: Databricks, Spark, dbt, Airflow, scikit-learn, PyTorch, LLMs/RAG\n\nTry the System Design, Data Pipeline and ML Forecast models in the Work section.",
   },
   {
     id: 'contact',
