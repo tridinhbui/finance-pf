@@ -46,6 +46,13 @@ const intents = [
       'At Deloitte (summer 2023), Tri supported month-end close for banking clients, cutting reporting discrepancies by 20%. He built Tableau KPI reports from SQL and Oracle data and evaluated internal controls under COSO and Basel.',
   },
   {
+    id: 'tech',
+    chip: 'Tech stack',
+    keys: ['tech', 'stack', 'engineer', 'engineering', 'fullstack', 'full-stack', 'full stack', 'react', 'node', 'javascript', 'typescript', 'machine learning', 'ml', 'data engineer', 'spark', 'pyspark', 'dbt', 'airflow', 'pipeline', 'coding', 'code', 'developer', 'computer science', 'cs', 'llm', 'rag', 'cong nghe'],
+    answer:
+      "Tri pairs finance with a Computer Science degree:\n• Full-stack: JavaScript/TypeScript, React, Node.js, REST APIs, CI/CD\n• ML & AI: Python, scikit-learn, PyTorch, time-series forecasting, LLM APIs, RAG\n• Data engineering: SQL, Databricks, Spark, Delta Lake, Airflow, dbt\n\nHe built this site himself. Try the Data Pipeline and ML Forecast models in the Work section.",
+  },
+  {
     id: 'skills',
     chip: 'Skills',
     keys: ['skill', 'tool', 'excel', 'python', 'sql', 'model', 'modeling', 'dcf', 'valuation', 'sap', 'power bi', 'vba', 'stack', 'ky nang'],

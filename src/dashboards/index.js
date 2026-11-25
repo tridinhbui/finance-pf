@@ -5,6 +5,8 @@ import * as bva from './bva.js';
 import * as deals from './deals.js';
 import * as dcf from './dcf.js';
 import * as fund from './fund.js';
+import * as ml from './ml.js';
+import * as pipeline from './pipeline.js';
 
 export const MODELS = [
   { id: 'liquidity', title: 'Liquidity Forecast', org: 'Smithfield Foods', mod: liquidity,
@@ -21,6 +23,10 @@ export const MODELS = [
     blurb: 'A $1.1B acquisition valuation with a live WACC × terminal-growth sensitivity grid.' },
   { id: 'fund', title: 'Fund Performance', org: 'Investment Group', mod: fund,
     blurb: 'The $250K student fund against the S&P 500 since inception.' },
+  { id: 'pipeline', title: 'Data Pipeline', org: 'Data Engineering', mod: pipeline,
+    blurb: 'Lakehouse behind an AI reporting system: SAP and Oracle to Databricks, ML and LLM layers, then BI and an app.' },
+  { id: 'ml', title: 'ML Forecast', org: 'Machine Learning', mod: ml,
+    blurb: 'Revenue forecasting models trained live in your browser, scored on a holdout window.' },
 ];
 
 export function initDashboards() {

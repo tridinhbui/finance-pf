@@ -59,3 +59,41 @@ export const toolkit = [
   ['Systems', ['SAP BPC', 'Workiva', 'Oracle', 'Databricks']],
   ['Code & BI', ['Python', 'SQL', 'VBA', 'Power BI', 'Tableau']],
 ];
+
+// Engineering skills, grouped. Edit freely — remove anything you don't use day to day.
+export const stack = [
+  {
+    group: 'Full-stack',
+    icon: '</>',
+    items: ['JavaScript', 'TypeScript', 'React', 'Node.js', 'Express', 'REST APIs', 'HTML / CSS', 'Vite', 'Git', 'GitHub Actions CI/CD'],
+  },
+  {
+    group: 'Machine Learning & AI',
+    icon: 'ƒ(x)',
+    items: ['Python', 'pandas', 'NumPy', 'scikit-learn', 'PyTorch', 'Time-series forecasting', 'LLM APIs', 'RAG & embeddings', 'Prompt engineering', 'MLflow'],
+  },
+  {
+    group: 'Data Engineering',
+    icon: '⇄',
+    items: ['SQL', 'Databricks', 'Apache Spark / PySpark', 'Delta Lake', 'ETL / ELT pipelines', 'Airflow', 'dbt', 'Snowflake', 'Data modeling', 'Power Query'],
+  },
+  {
+    group: 'Languages & CS',
+    icon: '{ }',
+    items: ['Python', 'SQL', 'JavaScript', 'Java', 'C', 'R', 'VBA', 'Data structures & algorithms', 'Statistics'],
+  },
+];
+
+// Lines the hero terminal types out ($ = command, others = output)
+export const terminal = [
+  '$ whoami',
+  'tri bui · finance × computer science',
+  '$ python train.py --model ridge --target revenue',
+  '✓ model trained · holdout MAPE under 5%',
+  '$ spark-submit etl/gl_to_gold.py',
+  '✓ bronze → silver → gold · 148/148 checks passed',
+  '$ dbt run --select gold.plant_bva',
+  '✓ 12 models built',
+  '$ npm run build && git push',
+  '✓ deployed to github pages',
+];

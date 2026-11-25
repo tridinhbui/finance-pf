@@ -1,5 +1,5 @@
 import './style.css';
-import { impact, experience, toolkit } from './data.js';
+import { impact, experience, toolkit, stack, terminal } from './data.js';
 import { initChat } from './chat.js';
 import { initDashboards } from './dashboards/index.js';
 
@@ -41,6 +41,15 @@ $('toolkit').innerHTML = toolkit
       `<div class="tk"><h4>${esc(g)}</h4><div class="tk-items">${items
         .map((it, j) => `<span style="--j:${j}">${esc(it)}</span>`)
         .join('')}</div></div>`
+  )
+  .join('');
+
+$('stack').innerHTML = stack
+  .map(
+    (g, i) => `<div class="stack-card reveal" style="--i:${i}">
+      <div class="sc-head"><span class="sc-icon">${esc(g.icon)}</span><h4>${esc(g.group)}</h4><span class="sc-count">${g.items.length}</span></div>
+      <div class="sc-items">${g.items.map((it, j) => `<span style="--j:${j}">${esc(it)}</span>`).join('')}</div>
+    </div>`
   )
   .join('');
 
@@ -107,3 +116,44 @@ if (!reduce && window.matchMedia('(hover: hover) and (pointer: fine)').matches) 
     photo.style.setProperty('--py', `${y * 14}px`);
   });
 }
+
+// ---------- Typing terminal ----------
+const term = $('term');
+function runTerminal() {
+  if (reduce) {
+    term.innerHTML = terminal.map((l) => `<span class="${l.startsWith('$') ? 'cmd' : 'out'}">${esc(l)}</span>`).join('\n');
+    return;
+  }
+  let line = 0;
+  let html = '';
+  const next = () => {
+    if (line >= terminal.length) {
+      setTimeout(() => ((html = ''), (line = 0), next()), 4000);
+      return;
+    }
+    const text = terminal[line];
+    if (!text.startsWith('$')) {
+      html += `<span class="out">${esc(text)}</span>\n`;
+      term.innerHTML = html + '<span class="caret"></span>';
+      line++;
+      return setTimeout(next, 450);
+    }
+    let i = 0;
+    const type = () => {
+      i++;
+      term.innerHTML = html + `<span class="cmd">${esc(text.slice(0, i))}</span><span class="caret"></span>`;
+      if (i < text.length) return setTimeout(type, 28 + Math.random() * 40);
+      html += `<span class="cmd">${esc(text)}</span>\n`;
+      line++;
+      setTimeout(next, 350);
+    };
+    type();
+  };
+  next();
+}
+new IntersectionObserver((entries, obs) => {
+  if (entries[0].isIntersecting) {
+    runTerminal();
+    obs.disconnect();
+  }
+}).observe(term);
