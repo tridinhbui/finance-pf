@@ -647,7 +647,7 @@ html, body { overflow-x: clip; }
   .kpi { padding: 9px 14px; }
   .kpi-value { font-size: 25px; }
   .dash-view > .d-body { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; }
-  .d-body > .chart { flex: 1 1 0; height: auto; min-height: 140px; }
+  .d-body > .chart { flex: 1 1 0; height: auto; min-height: 110px; }
   .d-body > .legend { margin-bottom: 6px; }
   .chart.short { height: 220px; }
   .split .chart { height: 240px; }
@@ -811,4 +811,95 @@ html, body { overflow-x: clip; }
 @media (max-width: 560px) {
   .tl-card .xp-links { display: none; }
   .xp { gap: 16px; }
+}
+
+/* ---------- Compact pass: ~25% less vertical scroll ---------- */
+section { padding: 52px 0; }
+.section-head { margin-bottom: 26px; padding-bottom: 12px; }
+.section-head h2 { font-size: 40px; }
+.hero { padding: 56px 0 36px; }
+.part { padding-top: 34px; }
+.marquee { padding: 14px 0; }
+.impact-card { padding: 22px 24px 18px; gap: 4px; }
+.ic-value { font-size: 46px; margin-top: 4px; }
+.ic-link { margin-top: 8px; }
+.cov-panel { padding: 26px 30px; }
+.cov-tab { padding: 10px 18px; }
+.cov-points { min-height: 7.6em; margin: 10px 0 14px; }
+.edu { padding: 26px; }
+.gpa { font-size: 48px; }
+.tk { padding: 18px 20px; }
+.eng { grid-template-columns: minmax(0, .85fr) minmax(0, 2fr); gap: 20px; }
+.stack { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.stack-card { padding: 16px; }
+.sc-head { margin-bottom: 10px; }
+.sc-head h4 { font-size: 17px; }
+.sc-icon { width: 30px; height: 30px; font-size: 11px; }
+.sc-items span { font-size: 12px; padding: 4px 8px; }
+.terminal pre { min-height: 0; height: 300px; font-size: 12px; overflow: hidden; }
+.built { margin-top: 18px; padding: 18px 24px; }
+.pw-body { padding: 22px 22px 0; }
+.pw-metrics { margin-top: 16px; }
+.pw-bars { height: 44px; margin-top: 14px; }
+.prod { gap: 12px; }
+.contact { padding: 56px 56px 64px; }
+.contact h2 { margin: 14px 0 8px; }
+.contact-sub { margin-bottom: 26px; }
+footer { padding: 26px 16px 90px; }
+
+/* timeline: left and right cards interleave instead of each taking a full row */
+@media (min-width: 901px) {
+  .xp { gap: 0; }
+  .tl-item + .tl-item { margin-top: -86px; }
+  .tl-card { padding: 18px 20px; }
+  .tl-card .xp-links { margin-top: 10px; }
+}
+@media (max-width: 1100px) and (min-width: 901px) {
+  .stack { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 900px) {
+  .eng { grid-template-columns: minmax(0, 1fr); }
+  .terminal pre { height: 230px; }
+}
+@media (max-width: 560px) {
+  section { padding: 40px 0; }
+  .section-head { margin-bottom: 20px; }
+  .section-head h2 { font-size: 30px; }
+  .hero { padding: 28px 0 28px; gap: 28px; }
+  .impact-card { padding: 16px 14px; }
+  .ic-value { font-size: 32px; }
+  .stack { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .stack-card { padding: 10px; }
+  .terminal pre { height: 200px; }
+  .pw-bars { display: none; }
+  .pw-body { padding: 18px 16px 16px; }
+  .contact { padding: 44px 18px 56px; }
+  .cov-points { min-height: 9.5em; }
+}
+/* second compact pass */
+section { padding: 42px 0; }
+.hero { padding-top: 40px; }
+.part { padding-top: 20px; }
+.marquee { padding: 10px 0; }
+.ic-link { display: none; }
+.impact-card:hover .ic-title { color: var(--navy); text-decoration: underline; text-decoration-color: var(--gold); text-underline-offset: 3px; }
+.cov-tab { padding: 8px 18px; }
+footer { padding: 20px 16px 80px; }
+@media (min-width: 901px) {
+  .tl-item + .tl-item { margin-top: -92px; }
+}
+/* third pass */
+section { padding: 36px 0; }
+.section-head { margin-bottom: 20px; padding-bottom: 10px; }
+.section-head h2 { font-size: 36px; }
+.hero-photo img { width: min(290px, 70vw); }
+.cov-tab { padding: 7px 18px; }
+.cov-points { min-height: 6.4em; }
+@media (max-width: 560px) {
+  section { padding: 34px 0; }
+  .hero-photo img { width: min(160px, 46vw); }
+}
+/* verified to fit at these heights: hide sub-pixel rounding scrollbars */
+@media (min-width: 1001px) and (min-height: 740px) {
+  .dash-view { overflow-y: hidden; }
 }

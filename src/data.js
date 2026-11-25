@@ -1,17 +1,17 @@
 // Headline achievements shown at the top of the page
 export const impact = [
   { value: 3, prefix: '$', suffix: 'B', org: 'Smithfield Foods', title: 'Liquidity forecast',
-    text: 'Rebuilt working-capital and FCF models. Under 5% variance, 80% faster refresh.', model: 'liquidity' },
+    text: 'Working-capital and FCF models: <5% variance, 80% faster.', model: 'liquidity' },
   { value: 2, prefix: '$', suffix: 'M', org: 'Smithfield Foods', title: 'AI strategy to the Board',
-    text: 'Pitched AI-in-Finance to the Board and helped launch the Finance AI Enablement Center.', model: 'ai' },
+    text: 'Pitched to the Board; launched the AI Enablement Center.', model: 'ai' },
   { value: 60, suffix: '%', org: 'Smithfield Foods', title: 'Faster executive reporting',
-    text: 'Less prep time for monthly Chairman decks and quarterly earnings benchmarking.', model: 'peers' },
+    text: 'Faster Chairman decks and earnings prep.', model: 'peers' },
   { value: 180, suffix: '+', org: 'Caprae Capital', title: 'M&A targets screened',
-    text: 'Screened on 3-statement and operating fit; 12 advanced to deeper review.', model: 'deals' },
+    text: '12 advanced to deeper diligence.', model: 'deals' },
   { value: 1.5, prefix: '$', suffix: 'M', dec: 1, org: 'Blackstone · Revantage', title: 'Losses mitigated',
-    text: 'Downside and cost-risk analysis across a $350M real estate portfolio.', model: 'dcf' },
+    text: 'Downside analysis on a $350M portfolio.', model: 'dcf' },
   { value: 85, prefix: '+', suffix: '%', org: 'Investment Group', title: 'Student fund return',
-    text: 'Ran a $250K fund as President, 30 pts ahead of the S&P 500.', model: 'fund' },
+    text: '$250K fund, 30 pts ahead of the S&P 500.', model: 'fund' },
 ];
 
 // One line per role; `models` link into the interactive dashboards
@@ -33,7 +33,7 @@ export const experience = [
     metricLabel: 'M&A targets screened',
     role: 'Private Equity Analyst',
     period: '2025',
-    line: '180+ targets screened, 12 advanced. 3-statement and DCF models.',
+    line: '3-statement and DCF models; 12 deals advanced.',
     models: [['deals', 'Deal Screener'], ['dcf', 'DCF']],
   },
   {
@@ -43,7 +43,7 @@ export const experience = [
     metricLabel: 'portfolio stress-tested',
     role: 'Financial Analyst',
     period: '2024',
-    line: 'Asset-level DCF on a $75M portfolio. Downside analysis on $350M.',
+    line: 'Asset-level DCF on $75M; risk review on $350M.',
     models: [['dcf', 'DCF']],
   },
   {
@@ -53,7 +53,7 @@ export const experience = [
     metricLabel: 'reporting discrepancies',
     role: 'Financial Analyst',
     period: 'Summer 2023',
-    line: 'Month-end close, SQL and Tableau KPI reporting, internal controls.',
+    line: 'Month-end close, SQL/Tableau KPIs, controls.',
     models: [['bva', 'BvA']],
   },
   {
@@ -63,7 +63,7 @@ export const experience = [
     metricLabel: 'smart-vision camera platform',
     role: 'Software Engineer',
     period: 'Summer 2023',
-    line: 'Fargo, ND. Built a full-stack web platform for smart-vision cameras: neural-network computer vision, Next.js, Python and AWS.',
+    line: 'Fargo, ND. Smart-camera platform: computer vision, Next.js, Python, AWS.',
     models: [['sysdesign', 'System Design'], ['ml', 'ML']],
   },
   {
@@ -93,7 +93,7 @@ export const products = [
     host: 'tuhoctaichinh.org',
     live: true,
     tagline: 'Free finance-learning platform for Vietnamese learners',
-    text: 'Lessons, calculators and real cases from financial statements to DCF valuation, portfolios and CFA prep. Gamified with XP, streaks, live leaderboards and spaced repetition.',
+    text: 'Lessons, calculators and real cases from statements to DCF and CFA prep, gamified with XP and leaderboards.',
     metrics: [['1,899+', 'lessons & cases'], ['3,600+', 'learners joined'], ['Live', 'leaderboard & XP']],
     stack: ['Next.js', 'TypeScript', 'Node.js', 'PostgreSQL', 'Redis', 'Databricks', 'AWS'],
   },
@@ -103,7 +103,7 @@ export const products = [
     host: 'finbud.net',
     live: false,
     tagline: 'Personal-finance web platform',
-    text: 'Product, architecture and engineering end to end: responsive web app, API layer, analytics pipeline and cloud deployment built to scale with the user base.',
+    text: 'Built end to end: web app, API, analytics pipeline and cloud deployment.',
     metrics: [['5,000+', 'users across products'], ['Cloud', 'AWS · Azure'], ['CI/CD', 'automated deploys']],
     stack: ['Vue.js', 'Python', 'FastAPI', 'PostgreSQL', 'Azure', 'Databricks', 'Docker'],
   },
@@ -166,65 +166,65 @@ export const coverage = [
   {
     id: 'corp', title: 'Corporate Finance', icon: '◆', metric: '$3B', metricLabel: 'balance sheet modeled', model: 'liquidity',
     points: [
-      'Rebuilt working-capital and FCF models across a $3B balance sheet for liquidity forecasting.',
-      'Pitched a long-term AI-in-Finance strategy to the Board of Directors.',
-      'Partnered with Accounting and business segments on cost and profitability.',
+      '$3B working-capital and FCF models for liquidity.',
+      'AI-in-Finance strategy pitched to the Board.',
+      'Cost and profitability work with Accounting.',
     ],
   },
   {
     id: 'fpa', title: 'FP&A', icon: '▤', metric: '−60%', metricLabel: 'executive deck prep time', model: 'bva',
     points: [
-      'Own 5 core Corporate FP&A sections in the monthly Chairman and management decks.',
-      'Monthly budget-vs-actual and plant-level cost and profitability tracking.',
-      'Standardized templates and automated checks cut prep time 60% YoY and errors 15%.',
+      'Own 5 FP&A sections in monthly Chairman decks.',
+      'Plant-level budget vs. actual tracking.',
+      'Prep time −60%, errors −15%.',
     ],
   },
   {
     id: 'strat', title: 'Strategic Finance', icon: '◎', metric: '$2M', metricLabel: 'projected annual savings', model: 'ai',
     points: [
-      'Built the business case for AI in Finance: $2M projected savings, 15% efficiency gain.',
-      'Helped launch the Finance AI Enablement Center.',
-      'Capital allocation and leverage scenarios on a $1.1B acquisition proposal.',
+      '$2M AI business case, 15% efficiency gain.',
+      'Helped launch the AI Enablement Center.',
+      'Capital allocation on a $1.1B deal model.',
     ],
   },
   {
     id: 'treasury', title: 'Treasury', icon: '⟲', metric: '<5%', metricLabel: 'forecast variance (10% tolerance)', model: 'liquidity',
     points: [
-      'Liquidity and cash-flow forecasting for FP&A and Treasury.',
-      'Working-capital drivers (DSO, DIO, DPO) and cash conversion modeled end to end.',
-      'Forecast refresh time cut by 80% with a rebuilt model.',
+      'Liquidity and cash-flow forecasting.',
+      'DSO, DIO and DPO driver models.',
+      'Forecast refresh 80% faster.',
     ],
   },
   {
     id: 'ir', title: 'Investor Relations', icon: '◐', metric: '8', metricLabel: 'peers benchmarked', model: 'peers',
     points: [
-      'Peer benchmarking on EBITDA margins and cost structures (incl. Tyson Foods, JBS).',
-      'Worked with the CFO and Investor Relations on quarterly earnings prep.',
-      'Cut quarterly earnings-prep time by 60%.',
+      'EBITDA benchmarking vs. Tyson, JBS and 6 more.',
+      'Earnings prep with the CFO and IR.',
+      'Earnings-prep time cut 60%.',
     ],
   },
   {
     id: 'mna', title: 'Valuation & M&A', icon: '⬡', metric: '180+', metricLabel: 'targets screened, 12 advanced', model: 'dcf',
     points: [
-      'Screened 180+ M&A targets in private equity; advanced 12 to deeper review.',
-      'Integrated 3-statement and DCF models with sensitivities; investment memos for partners.',
-      'Built a $1.1B acquisition model (DCF, comps, leverage, synergies).',
+      '180+ PE targets screened, 12 advanced.',
+      '3-statement and DCF models, investment memos.',
+      '$1.1B acquisition model with synergies.',
     ],
   },
   {
     id: 'transform', title: 'Finance Transformation & Data Analytics', icon: '⌬', metric: 'AI', metricLabel: 'reporting system (CFO Playbook)', model: 'pipeline',
     points: [
-      'Worked with IBM and Databricks on the CFO Playbook, an AI reporting system.',
-      'Validated GAAP and CAPEX outputs across Workiva and SAP.',
-      'SQL, Python, Databricks, Power BI and Tableau for automated KPI reporting.',
+      'CFO Playbook AI reporting with IBM and Databricks.',
+      'GAAP and CAPEX checks across Workiva and SAP.',
+      'SQL, Python and Power BI automation.',
     ],
   },
   {
     id: 'rotation', title: 'Smithfield Rotation', icon: '✦', metric: 'FLRP', metricLabel: 'Finance Leadership Rotation', model: 'bva',
     points: [
-      'Finance Leadership Rotation at a Fortune 500, working across FP&A, Treasury, Accounting and IR.',
-      'Corporate Expense Analysis and plant-level metrics, resolving discrepancies with Accounting.',
-      'Executive-facing work: Board, Chairman decks, CFO and VP of Data Analytics.',
+      'Fortune 500 Finance Leadership Rotation.',
+      'FP&A, Treasury, Accounting and IR exposure.',
+      'Work with the Board, Chairman and CFO.',
     ],
   },
 ];
