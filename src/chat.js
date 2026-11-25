@@ -48,6 +48,13 @@ const intents = [
       'At Deloitte (summer 2023), Tri supported month-end close for banking clients, cutting reporting discrepancies by 20%. He built Tableau KPI reports from SQL and Oracle data and evaluated internal controls under COSO and Basel.',
   },
   {
+    id: 'coverage',
+    chip: 'Finance areas',
+    keys: ['treasury', 'investor relations', 'ir', 'strategic finance', 'strategy', 'fp&a', 'fpa', 'planning', 'transformation', 'analytics', 'corporate finance', 'corp fin', 'areas', 'tracks', 'cover', 'm&a', 'valuation', 'rotation', 'liquidity', 'cash'],
+    answer:
+      'Tri covers the full corporate-finance stack:\n• Corporate Finance: $3B working-capital and FCF models\n• FP&A: Chairman decks, budget vs. actual, plant-level variance\n• Strategic Finance: $2M AI-in-Finance business case to the Board\n• Treasury: liquidity forecasting within 5%\n• Investor Relations: 8-peer benchmarking with the CFO and IR\n• Valuation & M&A: 180+ targets, DCF, $1.1B deal model\n• Finance Transformation: CFO Playbook AI reporting with IBM and Databricks\n\nSee the Finance coverage section for details.',
+  },
+  {
     id: 'skills',
     chip: 'Skills',
     keys: ['skill', 'tool', 'excel', 'python', 'sql', 'model', 'modeling', 'dcf', 'valuation', 'sap', 'power bi', 'vba', 'stack', 'ky nang'],
@@ -177,6 +184,7 @@ export function initChat() {
   function open() {
     panel.hidden = false;
     fab.classList.add('hide');
+    document.body.classList.add('chat-open');
     if (!started) {
       started = true;
       botSay("Hi, I'm Tri's assistant. Ask me about his experience, skills, education, or how to reach him.");
@@ -186,6 +194,7 @@ export function initChat() {
   function close() {
     panel.hidden = true;
     fab.classList.remove('hide');
+    document.body.classList.remove('chat-open');
   }
 
   document.querySelectorAll('[data-open-chat]').forEach((b) => b.addEventListener('click', open));

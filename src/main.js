@@ -3,6 +3,7 @@ import { impact, experience, toolkit, stack, terminal, products } from './data.j
 import { initChat } from './chat.js';
 import { initDashboards } from './dashboards/index.js';
 import { typeText, rotate } from './typing.js';
+import { initCoverage } from './coverage.js';
 
 const $ = (id) => document.getElementById(id);
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
@@ -21,17 +22,22 @@ $('impact-grid').innerHTML = impact
   )
   .join('');
 
-$('xp').innerHTML = experience
+$('xp').innerHTML = `<div class="tl-fill" aria-hidden="true"></div>` + experience
   .map(
-    (e, i) => `<article class="xp-row reveal" style="--i:${i}">
-      <span class="xp-period">${esc(e.period)}</span>
-      <div class="xp-main">
+    (e, i) => `<article class="tl-item reveal ${i % 2 ? 'right' : 'left'}" style="--i:0">
+      <span class="tl-dot" aria-hidden="true">${esc(e.mono)}</span>
+      <div class="tl-card">
+        <div class="tl-top">
+          <span class="tl-period">${esc(e.period)}</span>
+          <span class="tl-metric"><b>${esc(e.metric)}</b><small>${esc(e.metricLabel)}</small></span>
+        </div>
         <h3>${esc(e.company)}</h3>
-        <p><span class="xp-role">${esc(e.role)}</span> · ${esc(e.line)}</p>
+        <p class="tl-role">${esc(e.role)}</p>
+        <p class="tl-line">${esc(e.line)}</p>
+        <div class="xp-links">${e.models
+          .map(([id, label]) => `<a href="#work" data-model="${id}">${esc(label)} →</a>`)
+          .join('')}</div>
       </div>
-      <div class="xp-links">${e.models
-        .map(([id, label]) => `<a href="#work" data-model="${id}">${esc(label)} →</a>`)
-        .join('')}</div>
     </article>`
   )
   .join('');
@@ -76,6 +82,7 @@ $('stack').innerHTML = stack
 
 $('year').textContent = new Date().getFullYear();
 
+initCoverage($('cov'));
 initDashboards();
 initChat();
 
@@ -119,7 +126,7 @@ document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
 
 // ---------- Typed text (first time an element scrolls into view) ----------
 // Ghost copy reserves the final size so typing never shifts the layout.
-const typeTargets = document.querySelectorAll('.head-note, .part b, .ic-text, .prod-text, .built p, .contact-sub, .pw-body > p');
+const typeTargets = document.querySelectorAll('.head-note, .part-msg, .ic-text, .prod-text, .built p, .contact-sub, .pw-body > p');
 typeTargets.forEach((el) => {
   const full = el.textContent.trim();
   el.dataset.full = full;
@@ -133,7 +140,11 @@ const typeIO = new IntersectionObserver(
       const el = en.target;
       typeIO.unobserve(el);
       const speed = el.dataset.full.length > 90 ? 9 : 22;
-      setTimeout(() => typeText(el.querySelector('.t-live'), el.dataset.full, { speed }), 250);
+      const bot = el.closest('.part')?.querySelector('.part-bot');
+      setTimeout(() => {
+        bot?.classList.add('talking');
+        typeText(el.querySelector('.t-live'), el.dataset.full, { speed: bot ? 26 : speed, onDone: () => bot?.classList.remove('talking') });
+      }, bot ? 400 : 250);
     }),
   { threshold: 0.6 }
 );
@@ -147,6 +158,9 @@ setTimeout(
 
 // ---------- Scroll progress + nav shadow ----------
 const bar = $('progress');
+const toTop = document.querySelector('.to-top');
+const xp = $('xp');
+toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' }));
 const nav = document.querySelector('.nav');
 let ticking = false;
 window.addEventListener(
@@ -159,6 +173,12 @@ window.addEventListener(
       const p = h.scrollTop / (h.scrollHeight - h.clientHeight || 1);
       bar.style.transform = `scaleX(${p})`;
       nav.classList.toggle('scrolled', h.scrollTop > 8);
+      toTop.classList.toggle('show', h.scrollTop > 700);
+      const r = xp.getBoundingClientRect();
+      const f = Math.min(1, Math.max(0, (innerHeight * 0.6 - r.top) / r.height));
+      xp.style.setProperty('--fill', f);
+      xp.querySelectorAll('.tl-item').forEach((it) => it.classList.toggle('lit', it.getBoundingClientRect().top < innerHeight * 0.6));
+      toTop.style.setProperty('--p', p);
       ticking = false;
     });
   },
@@ -217,3 +237,28 @@ new IntersectionObserver((entries, obs) => {
     obs.disconnect();
   }
 }).observe(term);
+
+// ---------- Contact: rotating word, copy email, cursor spotlight ----------
+rotate($('c-rot'), ['numbers.', 'strategy.', 'valuation.', 'your next model.'], { hold: 1500 });
+const copyBtn = $('copy-email');
+copyBtn.addEventListener('click', async () => {
+  const act = copyBtn.querySelector('.cc-act');
+  try {
+    await navigator.clipboard.writeText('tridinhbui0901@gmail.com');
+    act.textContent = 'Copied ✓';
+  } catch {
+    window.location.href = 'mailto:tridinhbui0901@gmail.com';
+    return;
+  }
+  copyBtn.classList.add('done');
+  setTimeout(() => {
+    act.textContent = 'Copy';
+    copyBtn.classList.remove('done');
+  }, 1800);
+});
+const contact = $('contact');
+contact.addEventListener('pointermove', (e) => {
+  const r = contact.getBoundingClientRect();
+  contact.style.setProperty('--mx', `${e.clientX - r.left}px`);
+  contact.style.setProperty('--my', `${e.clientY - r.top}px`);
+});
