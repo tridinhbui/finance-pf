@@ -1,12 +1,11 @@
 import './style.css';
-import { stats, experience, projects, skills } from './data.js';
+import { stats, experience, toolkit } from './data.js';
 import { initChat } from './chat.js';
+import { initDashboards } from './dashboards/index.js';
 
 const $ = (id) => document.getElementById(id);
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
-const list = (items) => `<ul>${items.map((b) => `<li>${esc(b)}</li>`).join('')}</ul>`;
 
-// Stats
 $('stats').innerHTML = stats
   .map(
     (s) => `<div class="stat">
@@ -16,43 +15,31 @@ $('stats').innerHTML = stats
   )
   .join('');
 
-// Experience
-$('timeline').innerHTML = experience
+$('xp').innerHTML = experience
   .map(
-    (e) => `<article class="job reveal">
-      <div class="job-meta">
-        <span class="period">${esc(e.period)}</span>
-        ${e.location ? `<span class="muted">${esc(e.location)}</span>` : ''}
+    (e) => `<article class="xp-row reveal">
+      <span class="xp-period">${esc(e.period)}</span>
+      <div class="xp-main">
+        <h3>${esc(e.company)}</h3>
+        <p><span class="xp-role">${esc(e.role)}</span> · ${esc(e.line)}</p>
       </div>
-      <div>
-        <h3>${esc(e.company)}${e.tag ? `<span class="tag">${esc(e.tag)}</span>` : ''}</h3>
-        <p class="role">${esc(e.role)}</p>
-        ${list(e.bullets)}
-      </div>
+      <div class="xp-links">${e.models
+        .map(([id, label]) => `<a href="#work" data-model="${id}">${esc(label)} →</a>`)
+        .join('')}</div>
     </article>`
   )
   .join('');
 
-// Projects
-$('projects').innerHTML = projects
-  .map(
-    (p) => `<article class="card reveal">
-      <div class="card-kpi"><span>${esc(p.kpi)}</span><small>${esc(p.kpiLabel)}</small></div>
-      <h3>${esc(p.title)}</h3>
-      <p class="role">${esc(p.role)} <span class="muted">· ${esc(p.period)}</span></p>
-      ${list(p.bullets)}
-    </article>`
-  )
-  .join('');
-
-// Skills
-$('skills-grid').innerHTML = skills
-  .map((s) => `<div class="skill reveal"><h4>${esc(s.group)}</h4>${list(s.items)}</div>`)
+$('toolkit').innerHTML = toolkit
+  .map(([g, items]) => `<div class="tk"><h4>${esc(g)}</h4><div class="tk-items">${items.map((i) => `<span>${esc(i)}</span>`).join('')}</div></div>`)
   .join('');
 
 $('year').textContent = new Date().getFullYear();
 
-// Count-up for stats
+initDashboards();
+initChat();
+
+// Count-up + reveal
 const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 function countUp(el) {
   const target = Number(el.dataset.count);
@@ -65,18 +52,14 @@ function countUp(el) {
   };
   requestAnimationFrame(step);
 }
-
 const io = new IntersectionObserver(
-  (entries) => {
+  (entries) =>
     entries.forEach((en) => {
       if (!en.isIntersecting) return;
       en.target.classList.add('in');
       en.target.querySelectorAll('[data-count]').forEach(countUp);
       io.unobserve(en.target);
-    });
-  },
-  { threshold: 0.12 }
+    }),
+  { threshold: 0.1 }
 );
 document.querySelectorAll('.reveal, #stats').forEach((el) => io.observe(el));
-
-initChat();

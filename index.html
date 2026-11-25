@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tri Bui | Corporate Finance & FP&A</title>
-    <meta name="description" content="Tri Bui — Corporate Finance Associate at Smithfield Foods. FP&A, valuation, liquidity forecasting and AI in finance." />
+    <meta name="description" content="Tri Bui — Corporate Finance Associate. Interactive models from real FP&A, valuation and private equity work." />
     <meta name="theme-color" content="#faf8f3" />
     <link rel="icon" href="/tri-bui.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -15,10 +15,9 @@
     <header class="nav">
       <a href="#top" class="brand">Tri Bui</a>
       <nav>
+        <a href="#work">Models</a>
         <a href="#experience">Experience</a>
-        <a href="#leadership">Leadership</a>
-        <a href="#education">Education</a>
-        <a href="#skills">Expertise</a>
+        <a href="#about">About</a>
         <a href="#contact" class="nav-cta">Contact</a>
       </nav>
     </header>
@@ -26,86 +25,75 @@
     <main id="top">
       <section class="hero">
         <div class="hero-text">
-          <p class="eyebrow">Corporate Finance &nbsp;·&nbsp; FP&amp;A &nbsp;·&nbsp; Valuation</p>
-          <h1>Finance that drives<br /><em>better decisions.</em></h1>
-          <p class="lead">
-            I'm Tri Bui, Corporate Finance Associate in the Finance Leadership Rotation at
-            Smithfield Foods, a Fortune 500 company. I build the models behind liquidity,
-            profitability and capital allocation, and I lead work on bringing AI into finance.
-          </p>
+          <p class="eyebrow">Corporate Finance · FP&amp;A · Valuation</p>
+          <h1>I build the models<br /><em>finance runs on.</em></h1>
+          <p class="lead">Corporate Finance Associate at Smithfield Foods. Below are working versions of the tools I've built. Try them.</p>
           <div class="hero-actions">
-            <a class="btn primary" href="mailto:tridinhbui0901@gmail.com">Get in touch</a>
-            <button class="btn ghost" type="button" data-open-chat>Ask my AI assistant</button>
+            <a class="btn primary" href="#work">Explore the models ↓</a>
+            <button class="btn ghost" type="button" data-open-chat>Ask my assistant</button>
           </div>
-          <p class="meta">Smithfield, VA &nbsp;·&nbsp; Open to relocate</p>
         </div>
         <figure class="hero-photo">
           <img src="/tri-bui.png" alt="Portrait of Tri Bui" width="400" height="400" />
-          <figcaption>
-            <span class="cap-num">+85%</span>
-            <span>Cumulative return, $250K student investment fund</span>
-          </figcaption>
         </figure>
       </section>
 
-      <div class="logos reveal">
-        <span class="logos-label">Experience across</span>
-        <ul>
-          <li>Smithfield Foods</li>
-          <li>Blackstone · Revantage</li>
-          <li>Caprae Capital</li>
-          <li>Deloitte</li>
-        </ul>
-      </div>
-
       <section class="stats" id="stats"></section>
+
+      <section id="work" class="work">
+        <header class="section-head reveal">
+          <span class="num">01</span>
+          <h2>Work, modeled</h2>
+          <span class="head-note">Interactive · illustrative data</span>
+        </header>
+        <div class="dash reveal">
+          <nav class="dash-nav" id="dash-nav" role="tablist" aria-label="Models"></nav>
+          <div class="dash-main">
+            <div class="dash-head">
+              <div>
+                <span class="dash-org" id="dash-org"></span>
+                <h3 id="dash-title"></h3>
+              </div>
+              <p id="dash-blurb"></p>
+            </div>
+            <div id="dash-view" class="dash-view"></div>
+          </div>
+        </div>
+        <p class="disclaimer">Rebuilt from my own work using illustrative numbers. No confidential company data is shown.</p>
+      </section>
 
       <section id="experience">
         <header class="section-head reveal">
-          <span class="num">01</span>
+          <span class="num">02</span>
           <h2>Experience</h2>
         </header>
-        <div class="timeline" id="timeline"></div>
+        <div class="xp" id="xp"></div>
       </section>
 
-      <section id="leadership">
-        <header class="section-head reveal">
-          <span class="num">02</span>
-          <h2>Leadership &amp; Projects</h2>
-        </header>
-        <div class="cards" id="projects"></div>
-      </section>
-
-      <section id="education">
+      <section id="about" class="about">
         <header class="section-head reveal">
           <span class="num">03</span>
-          <h2>Education</h2>
+          <h2>Education &amp; Toolkit</h2>
         </header>
-        <article class="edu reveal">
-          <div>
-            <h3>Macalester College</h3>
-            <p>B.A. in Quantitative Finance &amp; Computer Science · Dean's List</p>
-            <p class="muted">CFA Level I Candidate (Feb 2027) · Champion, Quant Modeling (2023) and Financial Analytics (2022)</p>
-          </div>
-          <div class="edu-side">
+        <div class="about-grid">
+          <article class="edu reveal">
             <span class="gpa">3.85<small> / 4.00</small></span>
-            <span class="muted">St. Paul, MN · 2021 – 2025</span>
-          </div>
-        </article>
-      </section>
-
-      <section id="skills">
-        <header class="section-head reveal">
-          <span class="num">04</span>
-          <h2>Expertise</h2>
-        </header>
-        <div class="skills" id="skills-grid"></div>
+            <h3>Macalester College</h3>
+            <p>B.A. Quantitative Finance &amp; Computer Science, 2025</p>
+            <ul class="badges">
+              <li>CFA Level I Candidate</li>
+              <li>Dean's List</li>
+              <li>Champion · Quant Modeling '23</li>
+              <li>Champion · Financial Analytics '22</li>
+            </ul>
+          </article>
+          <div class="toolkit reveal" id="toolkit"></div>
+        </div>
       </section>
 
       <section id="contact" class="contact reveal">
-        <p class="eyebrow">Contact</p>
         <h2>Let's talk numbers.</h2>
-        <p class="contact-sub">Open to corporate finance, FP&amp;A, strategy and investment roles, and to relocating.</p>
+        <p class="contact-sub">Open to finance, FP&amp;A and investment roles. Based in Smithfield, VA, open to relocate.</p>
         <div class="contact-links">
           <a href="mailto:tridinhbui0901@gmail.com">tridinhbui0901@gmail.com</a>
           <a href="tel:+17633538782">+1 763-353-8782</a>
@@ -114,7 +102,7 @@
       </section>
     </main>
 
-    <footer>© <span id="year"></span> Tri Bui · Corporate Finance</footer>
+    <footer>© <span id="year"></span> Tri Bui</footer>
 
     <!-- Chatbot -->
     <button class="chat-fab" type="button" data-open-chat aria-label="Open chat with Tri's assistant">
