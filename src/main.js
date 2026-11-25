@@ -1,5 +1,5 @@
 import './style.css';
-import { impact, experience, toolkit, stack, terminal } from './data.js';
+import { impact, experience, toolkit, stack, terminal, products } from './data.js';
 import { initChat } from './chat.js';
 import { initDashboards } from './dashboards/index.js';
 
@@ -10,12 +10,12 @@ const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 // ---------- Render ----------
 $('impact-grid').innerHTML = impact
   .map(
-    (c, i) => `<a class="impact-card reveal" href="#work" data-model="${c.model}" style="--i:${i}">
+    (c, i) => `<a class="impact-card reveal" href="${c.href || '#work'}" ${c.model ? `data-model="${c.model}"` : ''} style="--i:${i}">
       <span class="ic-org">${esc(c.org)}</span>
-      <span class="ic-value">${esc(c.prefix || '')}<span data-count="${c.value}" data-dec="${c.dec || 0}">0</span>${esc(c.suffix)}</span>
+      <span class="ic-value">${esc(c.prefix || '')}<span data-count="${c.value}" data-dec="${c.dec || 0}" ${c.sep ? 'data-sep' : ''}>0</span>${esc(c.suffix)}</span>
       <span class="ic-title">${esc(c.title)}</span>
       <span class="ic-text">${esc(c.text)}</span>
-      <span class="ic-link">Open the model <span class="arr">→</span></span>
+      <span class="ic-link">${esc(c.link || 'Open the model')} <span class="arr">→</span></span>
     </a>`
   )
   .join('');
@@ -44,6 +44,26 @@ $('toolkit').innerHTML = toolkit
   )
   .join('');
 
+$('prod-grid').innerHTML = products
+  .map(
+    (p, i) => `<article class="prod reveal" style="--i:${i}">
+      <div class="prod-window">
+        <div class="pw-bar"><i></i><i></i><i></i><span class="pw-url">${p.live ? '🔒 ' : ''}${esc(p.host)}</span></div>
+        <div class="pw-body">
+          ${p.live ? '<span class="pw-live"><i></i>Live</span>' : ''}
+          <h3>${esc(p.name)}</h3>
+          <p>${esc(p.tagline)}</p>
+          <div class="pw-metrics">${p.metrics.map(([v, l]) => `<div><b>${esc(v)}</b><span>${esc(l)}</span></div>`).join('')}</div>
+          <div class="pw-bars" aria-hidden="true">${Array.from({ length: 14 }, (_, j) => `<span style="--h:${30 + ((j * 37 + i * 19) % 60)}%;--j:${j}"></span>`).join('')}</div>
+        </div>
+      </div>
+      <p class="prod-text">${esc(p.text)}</p>
+      <div class="prod-stack">${p.stack.map((t) => `<span>${esc(t)}</span>`).join('')}</div>
+      ${p.url ? `<a class="btn primary prod-btn" href="${p.url}" target="_blank" rel="noopener">Visit ${esc(p.host)} ↗</a>` : ''}
+    </article>`
+  )
+  .join('');
+
 $('stack').innerHTML = stack
   .map(
     (g, i) => `<div class="stack-card reveal" style="--i:${i}">
@@ -62,11 +82,12 @@ initChat();
 function countUp(el) {
   const target = Number(el.dataset.count);
   const dec = Number(el.dataset.dec || 0);
-  if (reduce) return (el.textContent = target.toFixed(dec));
+  const show = (v) => (el.hasAttribute('data-sep') ? Math.round(v).toLocaleString('en-US') : v.toFixed(dec));
+  if (reduce) return (el.textContent = show(target));
   const start = performance.now();
   const step = (t) => {
     const p = Math.min((t - start) / 1600, 1);
-    el.textContent = (target * (1 - Math.pow(1 - p, 4))).toFixed(dec);
+    el.textContent = show(target * (1 - Math.pow(1 - p, 4)));
     if (p < 1) requestAnimationFrame(step);
   };
   requestAnimationFrame(step);

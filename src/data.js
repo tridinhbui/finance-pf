@@ -4,8 +4,8 @@ export const impact = [
     text: 'Rebuilt working-capital and FCF models. Under 5% variance, 80% faster refresh.', model: 'liquidity' },
   { value: 2, prefix: '$', suffix: 'M', org: 'Smithfield Foods', title: 'AI strategy to the Board',
     text: 'Pitched AI-in-Finance to the Board and helped launch the Finance AI Enablement Center.', model: 'ai' },
-  { value: 60, suffix: '%', org: 'Smithfield Foods', title: 'Faster executive reporting',
-    text: 'Less prep time for monthly Chairman decks and quarterly earnings benchmarking.', model: 'peers' },
+  { value: 5000, suffix: '+', sep: true, org: 'Founder · Engineer', title: 'Users on my products',
+    text: 'Designed, built and scaled tuhoctaichinh.org and FinBud end to end.', href: '#products', link: 'See the products' },
   { value: 180, suffix: '+', org: 'Caprae Capital', title: 'M&A targets screened',
     text: 'Screened on 3-statement and operating fit; 12 advanced to deeper review.', model: 'deals' },
   { value: 1.5, prefix: '$', suffix: 'M', dec: 1, org: 'Blackstone · Revantage', title: 'Losses mitigated',
@@ -60,27 +60,61 @@ export const toolkit = [
   ['Code & BI', ['Python', 'SQL', 'VBA', 'Power BI', 'Tableau']],
 ];
 
+// Products I designed, built and run. Edit descriptions, stacks and links freely.
+export const products = [
+  {
+    name: 'Tự học Tài chính',
+    url: 'https://www.tuhoctaichinh.org',
+    host: 'tuhoctaichinh.org',
+    live: true,
+    tagline: 'Free finance-learning platform for Vietnamese learners',
+    text: 'Lessons, calculators and real cases from financial statements to DCF valuation, portfolios and CFA prep. Gamified with XP, streaks, live leaderboards and spaced repetition.',
+    metrics: [['1,899+', 'lessons & cases'], ['3,600+', 'learners joined'], ['Live', 'leaderboard & XP']],
+    stack: ['Next.js', 'TypeScript', 'Node.js', 'PostgreSQL', 'Redis', 'Databricks', 'AWS'],
+  },
+  {
+    name: 'FinBud',
+    url: '',
+    host: 'finbud.net',
+    live: false,
+    tagline: 'Personal-finance web platform',
+    text: 'Product, architecture and engineering end to end: responsive web app, API layer, analytics pipeline and cloud deployment built to scale with the user base.',
+    metrics: [['5,000+', 'users across products'], ['Cloud', 'AWS · Azure'], ['CI/CD', 'automated deploys']],
+    stack: ['Vue.js', 'Python', 'FastAPI', 'PostgreSQL', 'Azure', 'Databricks', 'Docker'],
+  },
+];
+
 // Engineering skills, grouped. Edit freely — remove anything you don't use day to day.
 export const stack = [
   {
-    group: 'Full-stack',
-    icon: '</>',
-    items: ['JavaScript', 'TypeScript', 'React', 'Node.js', 'Express', 'REST APIs', 'HTML / CSS', 'Vite', 'Git', 'GitHub Actions CI/CD'],
+    group: 'Languages',
+    icon: '{ }',
+    items: ['Python', 'R', 'C / C++', 'Java', 'SQL', 'JavaScript', 'TypeScript', 'VBA', 'Data structures & algorithms'],
   },
   {
-    group: 'Machine Learning & AI',
-    icon: 'ƒ(x)',
-    items: ['Python', 'pandas', 'NumPy', 'scikit-learn', 'PyTorch', 'Time-series forecasting', 'LLM APIs', 'RAG & embeddings', 'Prompt engineering', 'MLflow'],
+    group: 'System Design & Cloud',
+    icon: '☁',
+    items: ['AWS (EC2, S3, Lambda, RDS, CloudFront)', 'Azure (App Service, Functions, AKS, Blob)', 'Docker', 'Kubernetes', 'Terraform', 'Load balancing', 'Caching (Redis)', 'Message queues', 'Microservices', 'Autoscaling', 'CI/CD'],
+  },
+  {
+    group: 'Frontend & Full-stack',
+    icon: '</>',
+    items: ['React', 'Next.js', 'Vue.js', 'Node.js', 'Express', 'FastAPI', 'REST & GraphQL', 'Tailwind CSS', 'Vite', 'Git & GitHub Actions'],
   },
   {
     group: 'Data Engineering',
     icon: '⇄',
-    items: ['SQL', 'Databricks', 'Apache Spark / PySpark', 'Delta Lake', 'ETL / ELT pipelines', 'Airflow', 'dbt', 'Snowflake', 'Data modeling', 'Power Query'],
+    items: ['Databricks', 'Apache Spark / PySpark', 'Delta Lake', 'ETL / ELT pipelines', 'Airflow', 'dbt', 'Snowflake', 'Data modeling', 'Power Query'],
   },
   {
-    group: 'Languages & CS',
-    icon: '{ }',
-    items: ['Python', 'SQL', 'JavaScript', 'Java', 'C', 'R', 'VBA', 'Data structures & algorithms', 'Statistics'],
+    group: 'Machine Learning & AI',
+    icon: 'ƒ(x)',
+    items: ['pandas', 'NumPy', 'scikit-learn', 'PyTorch', 'Time-series forecasting', 'LLM APIs', 'RAG & embeddings', 'Prompt engineering', 'MLflow'],
+  },
+  {
+    group: 'Databases',
+    icon: '⛁',
+    items: ['PostgreSQL', 'MySQL', 'SQL Server', 'MongoDB', 'Redis', 'Oracle', 'Query optimization', 'Indexing & replication'],
   },
 ];
 
@@ -94,6 +128,8 @@ export const terminal = [
   '✓ bronze → silver → gold · 148/148 checks passed',
   '$ dbt run --select gold.plant_bva',
   '✓ 12 models built',
+  '$ terraform apply -var cloud=aws',
+  '✓ 14 resources · autoscaling 2–40 tasks · multi-AZ',
   '$ npm run build && git push',
   '✓ deployed to github pages',
 ];

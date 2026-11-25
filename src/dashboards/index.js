@@ -7,6 +7,7 @@ import * as dcf from './dcf.js';
 import * as fund from './fund.js';
 import * as ml from './ml.js';
 import * as pipeline from './pipeline.js';
+import * as sysdesign from './sysdesign.js';
 
 export const MODELS = [
   { id: 'liquidity', title: 'Liquidity Forecast', org: 'Smithfield Foods', mod: liquidity,
@@ -23,6 +24,8 @@ export const MODELS = [
     blurb: 'A $1.1B acquisition valuation with a live WACC × terminal-growth sensitivity grid.' },
   { id: 'fund', title: 'Fund Performance', org: 'Investment Group', mod: fund,
     blurb: 'The $250K student fund against the S&P 500 since inception.' },
+  { id: 'sysdesign', title: 'System Design', org: 'Cloud Architecture', mod: sysdesign,
+    blurb: 'How my products scale to thousands of users. Raise the load, switch AWS and Azure, and find the bottleneck.' },
   { id: 'pipeline', title: 'Data Pipeline', org: 'Data Engineering', mod: pipeline,
     blurb: 'Lakehouse behind an AI reporting system: SAP and Oracle to Databricks, ML and LLM layers, then BI and an app.' },
   { id: 'ml', title: 'ML Forecast', org: 'Machine Learning', mod: ml,
