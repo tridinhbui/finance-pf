@@ -8,7 +8,9 @@ import * as fund from './fund.js';
 import * as ml from './ml.js';
 import * as pipeline from './pipeline.js';
 import * as sysdesign from './sysdesign.js';
+import { typeText } from '../typing.js';
 
+// group: which dashboard shell a model lives in (finance first, then engineering)
 export const MODELS = [
   { id: 'liquidity', title: 'Liquidity Forecast', org: 'Smithfield Foods', mod: liquidity,
     blurb: 'Working-capital driven cash forecast. Move DSO, DIO, DPO and watch liquidity and forecast variance respond.' },
@@ -24,57 +26,74 @@ export const MODELS = [
     blurb: 'A $1.1B acquisition valuation with a live WACC × terminal-growth sensitivity grid.' },
   { id: 'fund', title: 'Fund Performance', org: 'Investment Group', mod: fund,
     blurb: 'The $250K student fund against the S&P 500 since inception.' },
-  { id: 'sysdesign', title: 'System Design', org: 'Cloud Architecture', mod: sysdesign,
+  { id: 'sysdesign', group: 'tech', title: 'System Design', org: 'Cloud Architecture', mod: sysdesign,
     blurb: 'How my products scale to thousands of users. Raise the load, switch AWS and Azure, and find the bottleneck.' },
-  { id: 'pipeline', title: 'Data Pipeline', org: 'Data Engineering', mod: pipeline,
+  { id: 'pipeline', group: 'tech', title: 'Data Pipeline', org: 'Data Engineering', mod: pipeline,
     blurb: 'Lakehouse behind an AI reporting system: SAP and Oracle to Databricks, ML and LLM layers, then BI and an app.' },
-  { id: 'ml', title: 'ML Forecast', org: 'Machine Learning', mod: ml,
+  { id: 'ml', group: 'tech', title: 'ML Forecast', org: 'Machine Learning', mod: ml,
     blurb: 'Revenue forecasting models trained live in your browser, scored on a holdout window.' },
 ];
 
+const groupOf = (m) => m.group || 'finance';
+
 export function initDashboards() {
-  const nav = document.getElementById('dash-nav');
-  const title = document.getElementById('dash-title');
-  const org = document.getElementById('dash-org');
-  const blurb = document.getElementById('dash-blurb');
-  const view = document.getElementById('dash-view');
-  let destroy = null;
+  const openers = {};
 
-  nav.innerHTML = MODELS.map(
-    (m, i) => `<button type="button" role="tab" data-id="${m.id}">
-      <span class="dn-num">${String(i + 1).padStart(2, '0')}</span>
-      <span class="dn-text"><b>${m.title}</b><small>${m.org}</small></span>
-    </button>`
-  ).join('');
+  document.querySelectorAll('[data-dash]').forEach((shell) => {
+    const group = shell.dataset.dash;
+    const models = MODELS.filter((m) => groupOf(m) === group);
+    const nav = shell.querySelector('.dash-nav');
+    const title = shell.querySelector('.dash-title');
+    const org = shell.querySelector('.dash-org');
+    const blurb = shell.querySelector('.dash-blurb');
+    const view = shell.querySelector('.dash-view');
+    let destroy = null;
 
-  function open(id, scroll = false) {
-    const m = MODELS.find((x) => x.id === id) || MODELS[0];
-    nav.querySelectorAll('button').forEach((b) => {
-      const on = b.dataset.id === m.id;
-      b.classList.toggle('on', on);
-      b.setAttribute('aria-selected', on);
-      if (on && window.innerWidth < 900) b.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' });
+    nav.innerHTML = models
+      .map(
+        (m, i) => `<button type="button" role="tab" data-id="${m.id}">
+          <span class="dn-num">${String(i + 1).padStart(2, '0')}</span>
+          <span class="dn-text"><b>${m.title}</b><small>${m.org}</small></span>
+        </button>`
+      )
+      .join('');
+
+    function open(id, { scroll = false, user = false } = {}) {
+      const m = models.find((x) => x.id === id) || models[0];
+      nav.querySelectorAll('button').forEach((b) => {
+        const on = b.dataset.id === m.id;
+        b.classList.toggle('on', on);
+        b.setAttribute('aria-selected', on);
+        // center the active tab in the horizontal nav (phones) without moving the page
+        if (on && (user || scroll) && nav.scrollWidth > nav.clientWidth) {
+          nav.scrollTo({ left: b.offsetLeft - (nav.clientWidth - b.offsetWidth) / 2, behavior: 'smooth' });
+        }
+      });
+      typeText(org, m.org, { speed: 30, caret: false });
+      typeText(title, m.title, { speed: 38 });
+      typeText(blurb, m.blurb, { speed: 12, caret: false });
+      if (destroy) destroy();
+      view.classList.remove('swap');
+      void view.offsetWidth;
+      view.classList.add('swap');
+      destroy = m.mod.render(view);
+      if (scroll) shell.closest('section').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    nav.addEventListener('click', (e) => {
+      const b = e.target.closest('button');
+      if (b) open(b.dataset.id, { user: true });
     });
-    title.textContent = m.title;
-    org.textContent = m.org;
-    blurb.textContent = m.blurb;
-    if (destroy) destroy();
-    view.classList.remove('swap');
-    void view.offsetWidth;
-    view.classList.add('swap');
-    destroy = m.mod.render(view);
-    if (scroll) document.getElementById('work').scrollIntoView({ behavior: 'smooth' });
-  }
-
-  nav.addEventListener('click', (e) => {
-    const b = e.target.closest('button');
-    if (b) open(b.dataset.id);
+    models.forEach((m) => (openers[m.id] = open));
+    open(models[0].id);
   });
+
   document.querySelectorAll('[data-model]').forEach((el) =>
     el.addEventListener('click', (e) => {
+      const fn = openers[el.dataset.model];
+      if (!fn) return;
       e.preventDefault();
-      open(el.dataset.model, true);
+      fn(el.dataset.model, { scroll: true });
     })
   );
-  open(MODELS[0].id);
 }

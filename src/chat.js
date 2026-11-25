@@ -1,3 +1,5 @@
+import { streamHTML } from './typing.js';
+
 // Resume assistant: answers visitor questions from Tri's resume.
 // Runs fully in the browser (no API key), so it is safe to host as a static site.
 
@@ -21,12 +23,14 @@ const intents = [
   },
   {
     id: 'ai',
+    chip: 'AI in finance',
     keys: ['ai', 'artificial', 'automation', 'databricks', 'ibm', 'copilot', 'machine', 'cfo playbook', 'enablement'],
     answer:
       "AI in finance is a big focus for Tri. At Smithfield he pitched a long-term AI-in-Finance strategy to the Board of Directors ($2M projected annual savings, 15% efficiency gain) and helped launch the Finance AI Enablement Center.\n\nHe also works with the VP of Data Analytics, IBM and Databricks on the CFO Playbook, an AI reporting system whose GAAP and CAPEX outputs are validated across Workiva and SAP.",
   },
   {
     id: 'pe',
+    chip: 'Private equity',
     keys: ['private equity', 'pe', 'caprae', 'm&a', 'merger', 'acquisition', 'deal', 'investment banking', 'buyout'],
     answer:
       'As a Private Equity Analyst at Caprae Capital Partners (Jan – Apr 2025), Tri evaluated 180+ M&A targets and advanced 12 to deeper review. He built and stress-tested 3-statement and DCF models and wrote investment memos for senior partners.\n\nHe also built a $1.1B acquisition model for a General Mills × The Andersons M&A proposal.',
@@ -42,20 +46,6 @@ const intents = [
     keys: ['deloitte', 'audit', 'controls', 'coso', 'basel', 'tableau', 'oracle', 'month-end', 'close'],
     answer:
       'At Deloitte (summer 2023), Tri supported month-end close for banking clients, cutting reporting discrepancies by 20%. He built Tableau KPI reports from SQL and Oracle data and evaluated internal controls under COSO and Basel.',
-  },
-  {
-    id: 'tech',
-    chip: 'Tech stack',
-    keys: ['tech', 'stack', 'engineer', 'engineering', 'fullstack', 'full-stack', 'full stack', 'react', 'node', 'javascript', 'typescript', 'machine learning', 'ml', 'data engineer', 'spark', 'pyspark', 'dbt', 'airflow', 'pipeline', 'coding', 'code', 'developer', 'computer science', 'cs', 'llm', 'rag', 'cong nghe', 'aws', 'azure', 'cloud', 'system design', 'kubernetes', 'docker', 'vue', 'next', 'nextjs', 'java', 'c++', 'scalab'],
-    answer:
-      "Tri pairs finance with a Computer Science degree:\n• Languages: Python, R, C/C++, Java, SQL, JavaScript/TypeScript\n• System design & cloud: AWS, Azure, Docker, Kubernetes, Terraform, Redis, queues, autoscaling\n• Full-stack: React, Next.js, Vue.js, Node.js, FastAPI\n• Data & ML: Databricks, Spark, dbt, Airflow, scikit-learn, PyTorch, LLMs/RAG\n\nTry the System Design, Data Pipeline and ML Forecast models in the Work section.",
-  },
-  {
-    id: 'products',
-    chip: 'Products he built',
-    keys: ['product', 'products', 'built', 'startup', 'founder', 'users', 'tuhoctaichinh', 'tu hoc', 'finbud', 'app', 'website', 'platform', 'side project'],
-    answer:
-      'Tri designed, built and scaled products used by 5,000+ people:\n• <a href="https://www.tuhoctaichinh.org" target="_blank" rel="noopener">tuhoctaichinh.org</a>: a free finance-learning platform with 1,899+ lessons and cases, 3,600+ learners, XP, streaks and live leaderboards\n• FinBud: a personal-finance web platform\n\nThe System Design model in the Work section shows how they scale.',
   },
   {
     id: 'skills',
@@ -81,6 +71,20 @@ const intents = [
     chip: 'Is he open to roles?',
     keys: ['hire', 'hiring', 'available', 'open to', 'relocat', 'opportunit', 'interview', 'recruit', 'position', 'move', 'location', 'where'],
     answer: `Yes. Tri is based in Smithfield, VA and open to relocating. He's interested in corporate finance, FP&A, strategy and investment roles.\n\nThe best way to reach him is ${mail}.`,
+  },
+  {
+    id: 'products',
+    chip: 'Products',
+    keys: ['product', 'products', 'built', 'startup', 'founder', 'users', 'tuhoctaichinh', 'tu hoc', 'finbud', 'app', 'website', 'platform', 'side project'],
+    answer:
+      'Tri designed, built and scaled products used by 5,000+ people:\n• <a href="https://www.tuhoctaichinh.org" target="_blank" rel="noopener">tuhoctaichinh.org</a>: a free finance-learning platform with 1,899+ lessons and cases, 3,600+ learners, XP, streaks and live leaderboards\n• FinBud: a personal-finance web platform\n\nThe System Design model in the Work section shows how they scale.',
+  },
+  {
+    id: 'tech',
+    chip: 'Tech stack',
+    keys: ['tech', 'stack', 'engineer', 'engineering', 'fullstack', 'full-stack', 'full stack', 'react', 'node', 'javascript', 'typescript', 'machine learning', 'ml', 'data engineer', 'spark', 'pyspark', 'dbt', 'airflow', 'pipeline', 'coding', 'code', 'developer', 'computer science', 'cs', 'llm', 'rag', 'cong nghe', 'aws', 'azure', 'cloud', 'system design', 'kubernetes', 'docker', 'vue', 'next', 'nextjs', 'java', 'c++', 'scalab'],
+    answer:
+      "Tri pairs finance with a Computer Science degree:\n• Languages: Python, R, C/C++, Java, SQL, JavaScript/TypeScript\n• System design & cloud: AWS, Azure, Docker, Kubernetes, Terraform, Redis, queues, autoscaling\n• Full-stack: React, Next.js, Vue.js, Node.js, FastAPI\n• Data & ML: Databricks, Spark, dbt, Airflow, scikit-learn, PyTorch, LLMs/RAG\n\nTry the System Design, Data Pipeline and ML Forecast models in the Work section.",
   },
   {
     id: 'contact',
@@ -148,10 +152,10 @@ export function initChat() {
 
   function botSay(html) {
     const t = addMsg('<span class="typing"><i></i><i></i><i></i></span>', 'bot');
-    const delay = 450 + Math.min(html.length * 4, 900);
+    const delay = 500 + Math.random() * 400;
     setTimeout(() => {
-      t.innerHTML = html;
-      scroll();
+      t.classList.add('live');
+      streamHTML(t, html, { speed: 26, onTick: scroll });
     }, delay);
   }
 

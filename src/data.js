@@ -4,8 +4,8 @@ export const impact = [
     text: 'Rebuilt working-capital and FCF models. Under 5% variance, 80% faster refresh.', model: 'liquidity' },
   { value: 2, prefix: '$', suffix: 'M', org: 'Smithfield Foods', title: 'AI strategy to the Board',
     text: 'Pitched AI-in-Finance to the Board and helped launch the Finance AI Enablement Center.', model: 'ai' },
-  { value: 5000, suffix: '+', sep: true, org: 'Founder · Engineer', title: 'Users on my products',
-    text: 'Designed, built and scaled tuhoctaichinh.org and FinBud end to end.', href: '#products', link: 'See the products' },
+  { value: 60, suffix: '%', org: 'Smithfield Foods', title: 'Faster executive reporting',
+    text: 'Less prep time for monthly Chairman decks and quarterly earnings benchmarking.', model: 'peers' },
   { value: 180, suffix: '+', org: 'Caprae Capital', title: 'M&A targets screened',
     text: 'Screened on 3-statement and operating fit; 12 advanced to deeper review.', model: 'deals' },
   { value: 1.5, prefix: '$', suffix: 'M', dec: 1, org: 'Blackstone · Revantage', title: 'Losses mitigated',
@@ -89,32 +89,32 @@ export const stack = [
   {
     group: 'Languages',
     icon: '{ }',
-    items: ['Python', 'R', 'C / C++', 'Java', 'SQL', 'JavaScript', 'TypeScript', 'VBA', 'Data structures & algorithms'],
+    items: ['Python', 'R', 'C / C++', 'Java', 'SQL', 'JavaScript', 'TypeScript'],
   },
   {
     group: 'System Design & Cloud',
     icon: '☁',
-    items: ['AWS (EC2, S3, Lambda, RDS, CloudFront)', 'Azure (App Service, Functions, AKS, Blob)', 'Docker', 'Kubernetes', 'Terraform', 'Load balancing', 'Caching (Redis)', 'Message queues', 'Microservices', 'Autoscaling', 'CI/CD'],
+    items: ['AWS', 'Azure', 'Docker', 'Kubernetes', 'Terraform', 'Redis caching', 'Queues & autoscaling'],
   },
   {
     group: 'Frontend & Full-stack',
     icon: '</>',
-    items: ['React', 'Next.js', 'Vue.js', 'Node.js', 'Express', 'FastAPI', 'REST & GraphQL', 'Tailwind CSS', 'Vite', 'Git & GitHub Actions'],
+    items: ['React', 'Next.js', 'Vue.js', 'Node.js', 'FastAPI', 'REST & GraphQL', 'CI/CD'],
   },
   {
     group: 'Data Engineering',
     icon: '⇄',
-    items: ['Databricks', 'Apache Spark / PySpark', 'Delta Lake', 'ETL / ELT pipelines', 'Airflow', 'dbt', 'Snowflake', 'Data modeling', 'Power Query'],
+    items: ['Databricks', 'PySpark', 'Delta Lake', 'Airflow', 'dbt', 'Snowflake', 'ETL / ELT'],
   },
   {
     group: 'Machine Learning & AI',
     icon: 'ƒ(x)',
-    items: ['pandas', 'NumPy', 'scikit-learn', 'PyTorch', 'Time-series forecasting', 'LLM APIs', 'RAG & embeddings', 'Prompt engineering', 'MLflow'],
+    items: ['pandas', 'scikit-learn', 'PyTorch', 'Time series', 'LLM APIs', 'RAG', 'MLflow'],
   },
   {
     group: 'Databases',
     icon: '⛁',
-    items: ['PostgreSQL', 'MySQL', 'SQL Server', 'MongoDB', 'Redis', 'Oracle', 'Query optimization', 'Indexing & replication'],
+    items: ['PostgreSQL', 'MySQL', 'SQL Server', 'MongoDB', 'Redis', 'Oracle'],
   },
 ];
 

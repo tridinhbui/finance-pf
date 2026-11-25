@@ -2,6 +2,7 @@ import './style.css';
 import { impact, experience, toolkit, stack, terminal, products } from './data.js';
 import { initChat } from './chat.js';
 import { initDashboards } from './dashboards/index.js';
+import { typeText, rotate } from './typing.js';
 
 const $ = (id) => document.getElementById(id);
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
@@ -93,18 +94,56 @@ function countUp(el) {
   requestAnimationFrame(step);
 }
 
-// ---------- Scroll reveal ----------
+// ---------- Scroll reveal: fade in on enter, fade out on leave ----------
+const counted = new WeakSet();
 const io = new IntersectionObserver(
   (entries) =>
     entries.forEach((en) => {
-      if (!en.isIntersecting) return;
-      en.target.classList.add('in');
-      en.target.querySelectorAll('[data-count]').forEach(countUp);
-      io.unobserve(en.target);
+      const el = en.target;
+      if (en.intersectionRatio >= 0.12) {
+        el.classList.add('in');
+        el.classList.remove('out-up');
+        if (!counted.has(el)) {
+          counted.add(el);
+          el.querySelectorAll('[data-count]').forEach(countUp);
+        }
+      } else if (!en.isIntersecting) {
+        el.classList.remove('in');
+        // leaving through the top drifts up, leaving through the bottom drifts down
+        el.classList.toggle('out-up', en.boundingClientRect.top < 0);
+      }
     }),
-  { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+  { threshold: [0, 0.12], rootMargin: '0px 0px -40px 0px' }
 );
 document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+
+// ---------- Typed text (first time an element scrolls into view) ----------
+// Ghost copy reserves the final size so typing never shifts the layout.
+const typeTargets = document.querySelectorAll('.head-note, .part b, .ic-text, .prod-text, .built p, .contact-sub, .pw-body > p');
+typeTargets.forEach((el) => {
+  const full = el.textContent.trim();
+  el.dataset.full = full;
+  el.classList.add('typed');
+  el.innerHTML = `<span class="t-ghost" aria-hidden="true">${esc(full)}</span><span class="t-live" aria-label="${esc(full)}"></span>`;
+});
+const typeIO = new IntersectionObserver(
+  (entries) =>
+    entries.forEach((en) => {
+      if (!en.isIntersecting) return;
+      const el = en.target;
+      typeIO.unobserve(el);
+      const speed = el.dataset.full.length > 90 ? 9 : 22;
+      setTimeout(() => typeText(el.querySelector('.t-live'), el.dataset.full, { speed }), 250);
+    }),
+  { threshold: 0.6 }
+);
+typeTargets.forEach((el) => typeIO.observe(el));
+
+// ---------- Hero rotating focus line ----------
+setTimeout(
+  () => rotate($('rotator'), ['FP&A and liquidity forecasting', 'Valuation, DCF and M&A', 'AI in finance', 'Capital allocation', 'Investor-ready reporting']),
+  1100
+);
 
 // ---------- Scroll progress + nav shadow ----------
 const bar = $('progress');

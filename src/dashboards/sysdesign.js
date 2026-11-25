@@ -1,4 +1,5 @@
 import { frame, kpis, slider, segmented, h } from './ui.js';
+import { typeText } from '../typing.js';
 
 // Scalable web-app architecture: drag load up and watch autoscaling, bottlenecks and cost respond
 const CLOUD = {
@@ -134,9 +135,15 @@ export function render(root) {
     set('cost', `$${Math.round(r.cost).toLocaleString()}`, `uptime target ${r.uptime}`);
 
     insight.className = `insight ${hot ? 'bad' : 'good'}`;
-    insight.textContent = hot
+    const msg = hot
       ? `Bottleneck: the database is at ${Math.round(r.dbUtil * 100)}% of capacity. ${s.cache ? 'Add read replicas' : 'Turn the Redis cache on'} to bring p95 latency back under 200 ms.`
       : `Healthy: ${r.app} stateless instances behind the load balancer, database at ${Math.round(r.dbUtil * 100)}% of capacity.`;
+    // retype only when the verdict flips, otherwise update in place
+    if (insight.dataset.state !== String(hot)) {
+      insight.dataset.state = String(hot);
+      typeText(insight, msg, { speed: 10 });
+    } else if (!insight.classList.contains('is-typing')) insight.textContent = msg;
+    else typeText(insight, msg, { speed: 6 });
   }
   update();
   return () => {};
